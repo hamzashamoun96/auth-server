@@ -18,17 +18,17 @@ MongoDB
 
 ## Heroku Deploying Url's
 
-[Heroku food](https://hamza-api-server.herokuapp.com/food)<br>
-[Heroku cloth](https://hamza-api-server.herokuapp.com/cloth)<br>
+[Heroku](https://hamza-auth-server.herokuapp.com/)<br>
+
 Note 1 : use postman to check it out and fill the body ( json format ) with the property username and password when signing up. <br>
 Note 2 : use postman to check it out and fill the authorization with your username and password.
 Note 3 : enter your token and login in the users page.
 
 ## Github Test
-[Github Actions](https://github.com/hamzashamoun96/api-server/actions)
+[Github Actions](https://github.com/hamzashamoun96/auth-server/actions)
 
 ## Github Pull Request
-[Pull Request](https://github.com/hamzashamoun96/api-server/pull/2)
+[Pull Request](https://github.com/hamzashamoun96/auth-server/pull/1)
 
 ## Test
 * for testing the application run the command npm test.
