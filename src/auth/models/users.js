@@ -20,7 +20,7 @@ usersSch.virtual('token').get(function () {
   }
   // console.log('token Object', tokenObject)
   // console.log('hhhhhh',jwt.sign(tokenObject , SECRET))
-  return jwt.sign(tokenObject, SECRET)
+  return jwt.sign(tokenObject, SECRET,{ expiresIn: '900s' })
 });
 
 usersSch.pre('save', async function () {
@@ -33,14 +33,15 @@ usersSch.pre('save', async function () {
 // BASIC AUTH
 usersSch.statics.authenticateBasic = async function (username, password) {
   // console.log(username,password)
-  const user = await this.findOne({ username : username})
-  console.log(user,"fewwe")
-  const valid = await bcrypt.compare(password, user.password)
-  consolee.log('VALID', valid)
+  const user1 = await this.findOne({ username : username})
+  // console.log(user1.password,"fewwe")
+  const valid = await bcrypt.compare(password, user1.password)
+  // console.log('VALID', valid)
   if (valid) {
-    return user;
+    return user1;
+  }else{
+    throw new Error('Invalid User');
   }
-  throw new Error('Invalid User');
 }
 
 // BEARER AUTH

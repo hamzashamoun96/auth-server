@@ -7,8 +7,8 @@ const jwt = require('jsonwebtoken')
 const User = require('./models/users.js');
 const basicAuth = require('./middleware/basic.js')
 const bearerAuth = require('./middleware/bearer.js')
-// const generator = require('generate-password');
-// const bcrypt = require('bcrypt');
+const generator = require('generate-password');
+const bcrypt = require('bcrypt');
 
 
 
@@ -35,7 +35,7 @@ authRouter.post('/signin', basicAuth, (req, res, next) => {
     user: req.user,
     token: req.user.token
   };
-  // console.log('USER SIGNIN',user)
+  console.log('USER SIGNIN',user)
   res.status(200).json(user);
 });
 
@@ -55,39 +55,35 @@ authRouter.get('/users', bearerAuth, async (req, res, next) => {
 });
 // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InZ2diIsImlhdCI6MTYxNzYzNTExMn0.8RBFxmzFfUFJ5tYr3OlgfCVN3kjth-TDtRiOIv3X2k4
 authRouter.get('/secret', bearerAuth, async (req, res, next) => {
-  console.log("SERCREEEEEEEEEEEET")
-  let token = req.headers.authorization.split(' ').pop()
-  console.log('ddddddddd',token)
-  let des = jwt.
-console.log(des,"DESTROYYYY")
-  // const token = req.headers.authorization.split(' ').pop();
+  // console.log("SERCREEEEEEEEEEEET")
+  // console.log('ddddddddd',token)
+ 
+  const token = req.headers.authorization.split(' ').pop();
   // console.log(token,"TOKKKKKKKK")
-  // const newToken = await User.authenticateWithToken(token)
+  const newToken = await User.authenticateWithToken(token)
   // console.log(newToken, 'New_TOKEN')
 
 
-  // let newPassword = generator.generate({
-  //   length: 8,
-  //   numbers: true
-  // })
+  let newPassword = generator.generate({
+    length: 8,
+    numbers: true
+  })
   // console.log(newPassword, "passssssssssssss")
 
-  // let newPass = await bcrypt.hash(newPassword, 10);
+  let newPass = await bcrypt.hash(newPassword, 10);
   // // console.log(newPass,"passssssssssssss")
 
-  // let newData = await User.find({ "_id": newToken.id, "username": newToken.username, "password": newToken.password, }).updateOne({
-  //   "$set": { "password": `${newPass}` , "token":newToken.token}
-  // });
+  let newData = await User.find({ "_id": newToken.id, "username": newToken.username, "password": newToken.password, }).updateOne({
+    "$set": { "password": `${newPass}` , "token":newToken.token}
+  });
 
-  // console.log(newData, "AAAAAA")
+  console.log(newData, "AAAAAA")
   // // console.log(newToken.token)
 
-
   res.status(200).json({
-    name:"fghjkl"
-    // Name: newToken.username,
-    // Your_New_Token: newToken.token,
-    // Your_New_Password: newPassword
+    Name: newToken.username,
+    Your_New_Token: newToken.token,
+    Your_New_Password: newPassword
   })
 });
 
