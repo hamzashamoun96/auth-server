@@ -10,7 +10,7 @@ MongoDB
 * ( /signup ) with the POST method to save username and password in the database and generate a token for the user.
 * ( /singin ) with the POST method to access the profile after validate the username and the password.
 * ( /users ) with the get method to login without rewrite the username and password based on the token.
-
+* ( /secret ) generate new password and token for the user.
 ## Middleware in the Application 
 * morgan.
 * basicAuth to validate the password.
